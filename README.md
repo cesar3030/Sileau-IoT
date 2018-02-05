@@ -1,6 +1,6 @@
-# h18-reseau-social
+# Sileau tbnk
 ## Project description
-Social network service to share, store event tickets and provide OAuth to signup to other services.
+The greatest silo monitoring system ever created!
 ## How to install
 ### :pushpin: For all environments
 Create a `.env` file out of `.env.example`.  
