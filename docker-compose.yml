@@ -13,6 +13,7 @@ services:
     build: express-server # specify the directory of the Dockerfile
     ports:
       - "9000:9000" #specify ports forewarding
+      - "9229:9229" #debug ports
     volumes:
       - ./express-server:/usr/src/app
       - /usr/src/app/node_modules

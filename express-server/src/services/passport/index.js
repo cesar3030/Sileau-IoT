@@ -8,7 +8,8 @@ import * as facebookService from '../facebook'
 import * as googleService from '../google'
 import User, { schema } from '../../api/user/model'
 
-export const password = () => (req, res, next) =>
+export const password = () => 
+(req, res, next) => {
   passport.authenticate('password', { session: false }, (err, user, info) => {
     if (err && err.param) {
       return res.status(400).json(err)
@@ -20,7 +21,7 @@ export const password = () => (req, res, next) =>
       next()
     })
   })(req, res, next)
-
+}
 export const facebook = () =>
   passport.authenticate('facebook', { session: false })
 

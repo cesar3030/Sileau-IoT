@@ -45,6 +45,7 @@ router.post('/google',
   google(),
   login)
 
-router.get('/test', () => console.log("testc"))
+router.get('/test', () => 
+console.log("testc"))
 
 export default router

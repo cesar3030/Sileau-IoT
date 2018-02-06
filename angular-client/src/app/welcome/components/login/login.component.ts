@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../../../shared/services/authentication.service';
+import { User } from '../../../shared/models/user';
 
 @Component({
   selector: 'app-login',
@@ -8,7 +9,7 @@ import { AuthenticationService } from '../../../shared/services/authentication.s
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  model: any = {username: 'test4@gmail.com', password: '123456'};
+  model: User = new User();
   loading = false;
   error = '';
 
@@ -28,7 +29,7 @@ export class LoginComponent implements OnInit {
 
   login() {
       this.loading = true;
-      this.authenticationService.login(this.model.username, this.model.password)
+      this.authenticationService.login(this.model.email, this.model.password)
           .subscribe(
               result => {
                 if (result === true) {

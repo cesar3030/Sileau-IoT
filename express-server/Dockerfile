@@ -21,10 +21,13 @@ COPY . /usr/src/app
 
 # Expose the port the app runs in
 EXPOSE 9000
+# Expose the debug port
+EXPOSE 9229
 
 RUN useradd -ms /bin/bash docker
 
 USER docker
 
 # Serve the app
-CMD ["npm", "run", "docker"]
+#CMD ["npm", "run", "docker"]
+CMD ["npm", "run", "debug"]

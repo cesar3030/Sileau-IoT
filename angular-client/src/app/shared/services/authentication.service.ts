@@ -18,12 +18,12 @@ export class AuthenticationService {
         const currentUser = JSON.parse(localStorage.getItem('currentUser'));
         this.token = currentUser && currentUser.token;
     }
-    login(username: string, password: string): Observable<boolean> {
-        const body = { username: username, password: password};
+    login(email: string, password: string): Observable<boolean> {
+        const body = { email: email, password: password };
         const headers = {
             headers: new HttpHeaders()
             .set('Content-Type', 'application/x-www-form-urlencoded')
-            .set('Authorization', 'Basic dGVzdDRAZ21haWwuY29tOjEyMzQ1Ng==')
+            .set('Authorization', 'Basic ' + btoa(email + ':' + password))
         };
         return this.httpClient.post('http://0.0.0.0:9000/api/auth', body, headers)
             .map((response: Response) => {
@@ -34,7 +34,7 @@ export class AuthenticationService {
                         // set token property
                         this.token = token;
                         // store username and jwt token in local storage to keep user logged in between page refreshes
-                        localStorage.setItem('currentUser', JSON.stringify({ username: username, token: token }));
+                        localStorage.setItem('currentUser', JSON.stringify({ email: email, token: token }));
                         // return true to indicate successful login
                         return true;
                     } else {

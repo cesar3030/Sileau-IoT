@@ -12,7 +12,17 @@ export class SignupService {
   constructor(private httpClient: HttpClient) { }
 
   signUp(user: User) {
-    return this.httpClient.post('http://0.0.0.0:9000/api/users', {'email': user.email, 'password': user.password})
+    const body = {
+      'firstname': user.firstname,
+      'lastname': user.lastname,
+      'email': user.email,
+      'password': user.password,
+      'address': user.address,
+      'city': user.city,
+      'postalCode': user.postalCode,
+      'province': user.province
+    };
+    return this.httpClient.post('http://0.0.0.0:9000/api/users', body)
       .catch((error: any) => {
         return Observable.throw(error.statusText);
     });

@@ -21,8 +21,39 @@ const userSchema = new Schema({
     required: true,
     minlength: 6
   },
-  name: {
+  firstname: {
     type: String,
+    required: true,
+    index: true,
+    trim: true
+  },
+  lastname: {
+    type: String,
+    required: true,
+    index: true,
+    trim: true
+  },
+  address: {
+    type: String,
+    required: true,
+    index: true,
+    trim: true
+  },
+  city: {
+    type: String,
+    required: true,
+    index: true,
+    trim: true
+  },
+  postalCode: {
+    type: String,
+    required: true,
+    index: true,
+    trim: true
+  },
+  province: {
+    type: String,
+    required: true,
     index: true,
     trim: true
   },
@@ -49,8 +80,8 @@ userSchema.path('email').set(function (email) {
     this.picture = `https://gravatar.com/avatar/${hash}?d=identicon`
   }
 
-  if (!this.name) {
-    this.name = email.replace(/^(.+)@.+$/, '$1')
+  if (!this.firstname) {
+    this.firstname = email.replace(/^(.+)@.+$/, '$1')
   }
 
   return email
@@ -71,10 +102,10 @@ userSchema.pre('save', function (next) {
 userSchema.methods = {
   view (full) {
     let view = {}
-    let fields = ['id', 'name', 'picture']
+    let fields = ['id', 'email', 'firstname', 'picture']
 
     if (full) {
-      fields = [...fields, 'email', 'createdAt']
+      fields = [...fields, 'lastname', 'address', 'postalCode', 'city', 'province', 'createdAt']
     }
 
     fields.forEach((field) => { view[field] = this[field] })
@@ -90,22 +121,22 @@ userSchema.methods = {
 userSchema.statics = {
   roles,
 
-  createFromService ({ service, id, email, name, picture }) {
+  createFromService ({ service, id, email, firstname, picture }) {
     return this.findOne({ $or: [{ [`services.${service}`]: id }, { email }] }).then((user) => {
       if (user) {
         user.services[service] = id
-        user.name = name
+        user.firstname = firstname
         user.picture = picture
         return user.save()
       } else {
         const password = randtoken.generate(16)
-        return this.create({ services: { [service]: id }, email, password, name, picture })
+        return this.create({ services: { [service]: id }, email, password, firstname, picture })
       }
     })
   }
 }
 
-userSchema.plugin(mongooseKeywords, { paths: ['email', 'name'] })
+userSchema.plugin(mongooseKeywords, { paths: ['email', 'firstname'] })
 
 const model = mongoose.model('User', userSchema)
 

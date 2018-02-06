@@ -7,7 +7,18 @@ import { schema } from './model'
 export User, { schema } from './model'
 
 const router = new Router()
-const { email, password, name, picture, role } = schema.tree
+const { 
+  email,
+  password,
+  firstname,
+  lastname,
+  city,
+  address,
+  postalCode,
+  province,
+  picture,
+  role 
+} = schema.tree
 
 /**
  * @api {get} /users Retrieve users
@@ -21,7 +32,7 @@ const { email, password, name, picture, role } = schema.tree
  * @apiError 401 Admin access only.
  */
 router.get('/',
-  token({ required: true, roles: ['admin'] }),
+  token({ required: true, roles: ['admin', 'user'] }),
   query(),
   index)
 
@@ -65,8 +76,20 @@ router.get('/:id',
  * @apiError 409 Email already registered.
  */
 router.post('/',
-  body({ email, password, name, picture, role }),
-  create)
+  body({ 
+    email, 
+    password, 
+    firstname, 
+    lastname, 
+    city,
+    address,
+    postalCode,
+    province,
+    picture, 
+    role
+  }),
+  create
+)
 
 /**
  * @api {put} /users/:id Update user
@@ -83,7 +106,7 @@ router.post('/',
  */
 router.put('/:id',
   token({ required: true }),
-  body({ name, picture }),
+  body({ firstname, lastname, picture }),
   update)
 
 /**
