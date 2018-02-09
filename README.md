@@ -27,8 +27,6 @@ If you want to execute some commands inside a container run:
 :warning: **Important**: When you want to execute a `docker-compose [whatever]` command, you need to be in the project root folder. The one where 
 `docker-compose.yml` is located.
 
-### Using Local machine  
-TO BE DONE  
 ## Services
 ### Backend REST API
 The REST API is using Node.JS and Express.JS.  
