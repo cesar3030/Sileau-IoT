@@ -14,6 +14,8 @@ import { FormsModule } from '@angular/forms';
 import { SignupComponent } from './signup/components/signup/signup.component';
 import { SignupService } from './signup/services/signup.service';
 import { WelcomeComponent } from './welcome/components/welcome/welcome.component';
+import { NavbarComponent } from './shared/components/navbar/navbar.component';
+import { NavbarService } from './shared/services/navbar.service';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,8 @@ import { WelcomeComponent } from './welcome/components/welcome/welcome.component
     HomeComponent,
     LoginComponent,
     SignupComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +38,8 @@ import { WelcomeComponent } from './welcome/components/welcome/welcome.component
     ArticleService,
     AuthGuard,
     AuthenticationService,
-    SignupService
+    SignupService,
+    NavbarService
   ],
   bootstrap: [AppComponent]
 })

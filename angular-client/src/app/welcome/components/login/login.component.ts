@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../../../shared/services/authentication.service';
+import { NavbarService } from '../../../shared/services/navbar.service';
 
 @Component({
   selector: 'app-login',
@@ -13,12 +14,14 @@ export class LoginComponent implements OnInit {
   error = '';
 
   constructor(
-      private router: Router,
-      private authenticationService: AuthenticationService) { }
+    private router: Router,
+    private authenticationService: AuthenticationService,
+    private navbarService: NavbarService) { }
 
   ngOnInit() {
       // reset login status
       this.authenticationService.logout();
+      this.navbarService.updateNavbar();
   }
 
   showError() {
