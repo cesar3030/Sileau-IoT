@@ -1,6 +1,6 @@
-# h18-reseau-social
+# Sileau tbnk
 ## Project description
-Social network service to share, store event tickets and provide OAuth to signup to other services.
+The greatest silo monitoring system ever created!
 ## How to install
 ### :pushpin: For all environments
 Create a `.env` file out of `.env.example`.  
@@ -27,8 +27,6 @@ If you want to execute some commands inside a container run:
 :warning: **Important**: When you want to execute a `docker-compose [whatever]` command, you need to be in the project root folder. The one where 
 `docker-compose.yml` is located.
 
-### Using Local machine  
-TO BE DONE  
 ## Services
 ### Backend REST API
 The REST API is using Node.JS and Express.JS.  
