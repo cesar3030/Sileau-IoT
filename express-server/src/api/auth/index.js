@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { login } from './controller'
+import { login, coapRequest } from './controller'
 import { password, master, facebook, google } from '../../services/passport'
 
 const router = new Router()
@@ -45,6 +45,7 @@ router.post('/google',
   google(),
   login)
 
-router.get('/test', () => console.log("testc"))
+router.get('/test', 
+  coapRequest)
 
 export default router
