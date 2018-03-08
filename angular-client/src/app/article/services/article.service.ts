@@ -4,10 +4,11 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { AuthenticationService } from '../../shared/services/authentication.service';
 import { Article } from '../models/article';
+import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class ArticleService {
-    private readonly URL = 'http://localhost:9000/api/articles';
+    private readonly URL = environment.apiUrl + '/api/articles';
 
     constructor(
         private httpClient: HttpClient,

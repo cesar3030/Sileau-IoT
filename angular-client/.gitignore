@@ -40,3 +40,6 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# Environment variable to hack the VM
+src/environments/environment.vm.ts

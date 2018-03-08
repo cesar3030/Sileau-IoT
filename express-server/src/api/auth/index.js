@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { login } from './controller'
+import { login, coapPostRequest, coapPutRequest, coapGetRequest } from './controller'
 import { password, master, facebook, google } from '../../services/passport'
 
 const router = new Router()
@@ -45,6 +45,13 @@ router.post('/google',
   google(),
   login)
 
-router.get('/test', () => console.log("testc"))
+router.get('/coap', 
+  coapGetRequest)
+
+router.post('/coap', 
+  coapPostRequest)
+
+router.put('/coap', 
+  coapPutRequest)
 
 export default router

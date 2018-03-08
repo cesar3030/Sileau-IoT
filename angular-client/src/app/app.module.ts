@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { MaterializeModule } from 'angular2-materialize';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ArticleListComponent } from './article/components/article-list/article-list.component';
@@ -13,6 +14,8 @@ import { FormsModule } from '@angular/forms';
 import { SignupComponent } from './signup/components/signup/signup.component';
 import { SignupService } from './signup/services/signup.service';
 import { WelcomeComponent } from './welcome/components/welcome/welcome.component';
+import { NavbarComponent } from './shared/components/navbar/navbar.component';
+import { NavbarService } from './shared/services/navbar.service';
 
 @NgModule({
   declarations: [
@@ -21,19 +24,22 @@ import { WelcomeComponent } from './welcome/components/welcome/welcome.component
     HomeComponent,
     LoginComponent,
     SignupComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MaterializeModule
   ],
   providers: [
     ArticleService,
     AuthGuard,
     AuthenticationService,
-    SignupService
+    SignupService,
+    NavbarService
   ],
   bootstrap: [AppComponent]
 })

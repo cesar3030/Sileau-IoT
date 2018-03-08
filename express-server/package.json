@@ -53,6 +53,7 @@
     "bluebird": "^3.5.1",
     "body-parser": "^1.18.2",
     "bodymen": "^1.0.3",
+    "coap": "^0.21.0",
     "compression": "^1.7.1",
     "cors": "^2.8.4",
     "express": "^4.16.2",
