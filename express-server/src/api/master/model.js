@@ -1,4 +1,5 @@
 import mongoose, { Schema } from 'mongoose'
+var coap = require('coap')
 
 const masterSchema = new Schema({
   host: {
@@ -6,6 +7,9 @@ const masterSchema = new Schema({
   },
   imei: {
     type: String
+  },
+  activated: {
+    type: Boolean
   }
 }, {
   timestamps: true,
@@ -30,6 +34,23 @@ masterSchema.methods = {
       ...view
       // add properties for a full view
     } : view
+  },
+  coapRequest(payload) {
+    const req2 = coap.request({
+      hostname: this.host,
+      pathname: '/encoding',
+      method: 'POST',
+      option: {"Content-Type": "application/json"},
+      query: "accept=application/json"
+    })
+
+    req2.write(JSON.stringify(payload));
+
+    req2.on('response', function(res) {
+      res.pipe(process.stdout)
+      return;
+    })
+    req2.end()
   }
 }
 

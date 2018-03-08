@@ -35,31 +35,15 @@ export const destroy = ({ params }, res, next) =>
     .then(success(res, 204))
     .catch(next)
 
-export const coapRequest = ({ params }, res, next) => {
+export const coapRequest = ({ params }, res, next) =>
   Master.findById(params.id)
     .then(notFound(res))
     .then((master) => {
-      var payload = {
-        activated: params.body.activated
-      }
-
-      const req2 = coap.request({
-        hostname: master.host,
-        pathname: '/encoding',
-        method: 'POST',
-        option: {"Content-Type": "application/json"},
-        query: "accept=application/json"
-      })
-
-      req2.write(JSON.stringify(payload));
-  
-      req2.on('response', function(res3) {
-        res3.pipe(process.stdout)
-        return master
-      })
-
-      req2.end()
-      return true
+      master.activated = !master.activated
+      master.save()
+      const payload = {activated:master.activated}
+      master.coapRequest(payload)
+      return payload
     })
-    .then(success(res, 204))
+    .then(success(res))
     .catch(next)

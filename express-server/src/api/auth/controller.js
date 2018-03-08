@@ -16,7 +16,6 @@ export const coapGetRequest = ({ user }, res, next) => {
     pathname: '/encoding',
     option: {"Content-Type": "application/json"},
     query: "accept=application/json"
-  
   })
   .on('response', function(res2) {
     console.log('response code', res2.code)
