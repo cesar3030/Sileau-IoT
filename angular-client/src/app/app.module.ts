@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ArticleListComponent } from './article/components/article-list/article-list.component';
 import { ArticleService } from './article/services/article.service';
+import { MasterService } from './master/services/master.service';
 import { AuthenticationService } from './shared/services/authentication.service';
 import { HomeComponent } from './home/components/home/home.component';
 import { AuthGuard } from './shared/guards/auth.guard';
@@ -16,6 +17,7 @@ import { SignupService } from './signup/services/signup.service';
 import { WelcomeComponent } from './welcome/components/welcome/welcome.component';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { NavbarService } from './shared/services/navbar.service';
+import { MasterComponent } from './master/components/master/master.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import { NavbarService } from './shared/services/navbar.service';
     LoginComponent,
     SignupComponent,
     WelcomeComponent,
-    NavbarComponent
+    NavbarComponent,
+    MasterComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +42,8 @@ import { NavbarService } from './shared/services/navbar.service';
     AuthGuard,
     AuthenticationService,
     SignupService,
-    NavbarService
+    NavbarService,
+    MasterService
   ],
   bootstrap: [AppComponent]
 })

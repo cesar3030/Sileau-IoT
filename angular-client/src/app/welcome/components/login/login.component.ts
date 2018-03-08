@@ -9,7 +9,7 @@ import { NavbarService } from '../../../shared/services/navbar.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  model: any = {username: 'test4@gmail.com', password: '123456'};
+  model: any = {username: 'test@gmail.com', password: '123456'};
   loading = false;
   error = '';
 
