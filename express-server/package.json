@@ -12,6 +12,7 @@
     "postcoverage": "opn coverage/lcov-report/index.html",
     "dev": "nodemon -i \"*.test.js\" .",
     "docker": "nodemon -L \"*.test.js\" .",
+    "mlab": "cross-env NODE_ENV=mlab nodemon -i \"*.test.js\" -r dotenv-safe/config .",
     "prod": "cross-env NODE_ENV=production nodemon -i \"*.test.js\" -r dotenv-safe/config .",
     "lint": "eslint src",
     "docs": "apidoc -i src -o docs && apidoc-markdown -p docs -o DOCS.md",

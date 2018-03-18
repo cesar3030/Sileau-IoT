@@ -51,6 +51,14 @@ const config = {
       }
     }
   },
+  mlab: {
+    mongo: {
+      uri: 'mongodb://admin:admin@ds249787.mlab.com:49787/silo-dev',
+      options: {
+        debug: true
+      }
+    }
+  },
   docker: {
     mongo: {
       uri: 'mongodb://database/express-server-dev',

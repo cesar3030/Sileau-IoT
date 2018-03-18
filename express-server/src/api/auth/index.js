@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { login, coapPostRequest, coapPutRequest, coapGetRequest } from './controller'
+import { login, coapPostRequest, coapPutRequest, coapServerGetRequest, coapGetRequest } from './controller'
 import { password, master, facebook, google } from '../../services/passport'
 
 const router = new Router()
@@ -47,6 +47,9 @@ router.post('/google',
 
 router.get('/coap', 
   coapGetRequest)
+
+router.get('/coap/request', 
+  coapServerGetRequest)
 
 router.post('/coap', 
   coapPostRequest)

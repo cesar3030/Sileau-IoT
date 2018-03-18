@@ -18,8 +18,16 @@ services:
       - /usr/src/app/node_modules
     links:
       - database
+      - coap
       
   database: # name of the third service
     image: mongo:3.6.2 # specify image to build container from
     ports:
       - "27017:27017" # specify port forewarding
+  
+  coap:
+    build: coap-server
+    volumes:
+      - ./coap-server:/usr/src/app
+    ports:
+      - "5683:5683"

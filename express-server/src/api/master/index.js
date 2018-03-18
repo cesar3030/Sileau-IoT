@@ -2,12 +2,12 @@ import { Router } from 'express'
 import { middleware as query } from 'querymen'
 import { middleware as body } from 'bodymen'
 import { token } from '../../services/passport'
-import { create, index, show, update, destroy, coapRequest } from './controller'
+import { create, index, show, update, destroy, coapRequest, newData } from './controller'
 import { schema } from './model'
 export Master, { schema } from './model'
 
 const router = new Router()
-const { host, imei } = schema.tree
+const { host, imei, humidity, pressure, temperature } = schema.tree
 
 /**
  * @api {post} /masters Create master
@@ -34,6 +34,19 @@ router.post('/',
  */
 router.post('/:id/request',
   coapRequest)
+
+/**
+ * @api {post} /masters/:id/data Add Temperature, Pressure and Humidity data to the model
+ * @apiName SendCoAPRequestToMaster
+ * @apiGroup Master
+ * @apiParam {Boolean} activated true||false.
+ * @apiSuccess {Object} master Master's data.
+ * @apiError {Object} 400 Some parameters may contain invalid values.
+ * @apiError 404 Master not found.
+ */
+router.post('/:id/data',
+  body({temperature, pressure, humidity}),
+  newData)
 
 /**
  * @api {get} /masters Retrieve masters
