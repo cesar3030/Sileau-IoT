@@ -97,7 +97,6 @@ export const coapServerGetRequest = ({ user }, res, next) => {
       var json = JSON.parse(data)
       console.log(json)
       res.status(200).json(json)
-      process.exit(0)
     }))
   })
   req.end()

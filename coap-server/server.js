@@ -3,6 +3,7 @@ var request = require('request');
 var bl = require('bl')
 
 coap.createServer((req, res) => {
+    console.log("hey")
     console.log(req.url.split('/')[1])
     req.pipe(bl(function(err, data) {
         var json = JSON.parse(data)
