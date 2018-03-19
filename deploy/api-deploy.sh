@@ -85,4 +85,4 @@ fi
 echo "Updating heroku master branch..."
 git push -f heroku master:master
 
-echo "Unik API Deployed !!"
+echo "Silo API Deployed !!"

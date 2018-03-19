@@ -1,11 +1,16 @@
 {
   "name": "coap-server",
   "version": "1.0.0",
-  "description": "CoAP Server to recieve CoAP Request from beaglebones and create HTTP request with the CoAP request payload to the SiloAPI.  ",
+  "description": "CoAP/HTTP Proxy Server to to transfer CoAP Request with payload to the Sileau API (and the other way around).",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "docker": "nodemon -L ."
+    "docker": "nodemon -L .",
+    "heroku": "npm server.js"
+  },
+  "engines": {
+    "node": "9.4.0",
+    "npm": "5.6.0"
   },
   "author": "Cesar Jeanroy",
   "license": "ISC",
