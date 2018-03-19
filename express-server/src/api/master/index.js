@@ -7,7 +7,7 @@ import { schema } from './model'
 export Master, { schema } from './model'
 
 const router = new Router()
-const { host, imei, humidity, pressure, temperature } = schema.tree
+const { host, imei, humidity, pressure, temperature, activated } = schema.tree
 
 /**
  * @api {post} /masters Create master
@@ -82,7 +82,7 @@ router.get('/:id',
  * @apiError 404 Master not found.
  */
 router.put('/:id',
-  body({ host, imei }),
+  body({ host, imei, activated }),
   update)
 
 /**
