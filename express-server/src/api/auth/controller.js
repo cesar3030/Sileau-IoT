@@ -79,3 +79,35 @@ export const coapPutRequest = ({ user }, res, next) => {
 
   req2.end()
 }
+
+export const coapServerGetRequest = ({ user }, res, next) => {
+  var req = coap.request('coap://localhost/Matteo')
+  
+  var payload = {
+    temperature: 1,
+    humidity: 2,
+    pressure: 3
+  }
+  req.setOption("Content-Format", "application/json");
+  req.write(JSON.stringify(payload));
+
+  req.on('response', function(res2) {
+    res2.pipe(process.stdout)
+    res2.pipe(bl(function(err, data) {
+      var json = JSON.parse(data)
+      console.log(json)
+      res.status(200).json(json)
+    }))
+  })
+  req.end()
+}
+
+function test(){
+  var req = coap.request('coap://0.0.0.0:5683/Matteo')
+  req.on('response', function(res2, err) {
+    console.log("-> "+err)
+    res2.pipe(process.stdout)
+  })
+
+  req.end()
+}

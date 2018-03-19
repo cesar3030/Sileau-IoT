@@ -9,8 +9,21 @@ const masterSchema = new Schema({
     type: String
   },
   activated: {
-    type: Boolean
-  }
+    type: Boolean,
+    default: false
+  },
+  temperature:[{
+    value: Number,
+    datetime: { type: Date, default: Date.now }
+  }],
+  humidity:[{
+    value: Number,
+    datetime: { type: Date, default: Date.now }
+  }],
+  pressure:[{
+    value: Number,
+    datetime: { type: Date, default: Date.now }
+  }]
 }, {
   timestamps: true,
   toJSON: {
@@ -26,6 +39,10 @@ masterSchema.methods = {
       id: this.id,
       host: this.host,
       imei: this.imei,
+      activated: this.activated,
+      humidity: this.humidity,
+      temperature: this.temperature,
+      pressure: this.pressure,
       createdAt: this.createdAt,
       updatedAt: this.updatedAt
     }

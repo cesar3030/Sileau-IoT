@@ -28,6 +28,20 @@ export const update = ({ bodymen: { body }, params }, res, next) =>
     .then(success(res))
     .catch(next)
 
+export const newData = ({ bodymen: { body }, params }, res, next) =>
+  Master.findById(params.id)
+    .then(notFound(res))
+    .then((master) => {
+      master.temperature.push({value: body.temperature})
+      master.humidity.push({value: body.humidity})
+      master.pressure.push({value: body.pressure})
+      master.save()
+      return master
+    })
+    .then((master) => master ? { activated: master.activated } : null)
+    .then(success(res))
+    .catch(next)
+
 export const destroy = ({ params }, res, next) =>
   Master.findById(params.id)
     .then(notFound(res))
