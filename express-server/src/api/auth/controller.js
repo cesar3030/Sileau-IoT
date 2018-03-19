@@ -81,7 +81,7 @@ export const coapPutRequest = ({ user }, res, next) => {
 }
 
 export const coapServerGetRequest = ({ user }, res, next) => {
-  var req = coap.request('coap://localhost/Matteo')
+  var req = coap.request('https://coap-silo.herokuapp.com/')
   
   var payload = {
     temperature: 1,
