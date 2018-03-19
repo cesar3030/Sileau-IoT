@@ -18,6 +18,10 @@
     "docs": "apidoc -i src -o docs && apidoc-markdown -p docs -o DOCS.md",
     "postdocs": "opn docs/index.html"
   },
+  "engines": {
+    "node": "9.4.0",
+    "npm": "5.6.0"
+  },
   "jest": {
     "testEnvironment": "node",
     "setupTestFrameworkScriptFile": "<rootDir>/test/setup.js"
