@@ -5,5 +5,5 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://0.0.0.0:9000'
+  apiUrl: 'https://api-silo.herokuapp.com/api/'
 };

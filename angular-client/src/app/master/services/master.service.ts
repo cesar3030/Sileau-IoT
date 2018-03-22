@@ -12,11 +12,15 @@ export class MasterService {
   constructor(private http:HttpClient) {}
  
   getMasters() {
-    return this.http.get(environment.apiUrl + '/api/masters');
+    return this.http.get(environment.apiUrl + 'masters');
+  }
+
+  toogleActivation(master){
+    return this.http.put(environment.apiUrl + 'masters/' + master.id, {activated: !master.activated}, {});
   }
 
   coapRequest(master) {
-    return this.http.post(environment.apiUrl + '/api/masters/' + master.id + '/request', {test: ''}, {});
+    return this.http.post(environment.apiUrl + 'masters/' + master.id + '/request', {test: ''}, {});
   }
 
 }
