@@ -23,7 +23,7 @@ export class SignupService {
       'postalCode': user.postalCode,
       'province': user.province
     };
-    return this.httpClient.post(environment.apiUrl + '/api/users', body)
+    return this.httpClient.post(environment.apiUrl + '/users', body)
       .catch((error: any) => {
         return Observable.throw(error.statusText);
       });

@@ -3,6 +3,7 @@ import { User } from '../../../shared/models/user';
 import { SignupService } from '../../services/signup.service';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../../../shared/services/authentication.service';
+import { FormControl, ValidatorFn, ValidationErrors, AbstractControl } from '@angular/forms';
 
 @Component({
   selector: 'app-signup',

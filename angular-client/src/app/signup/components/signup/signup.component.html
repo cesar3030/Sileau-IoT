@@ -1,50 +1,85 @@
-<div class="col-md-6 col-md-offset-3">
-    <h2>Sign up</h2>
-    <form name="form" (ngSubmit)="f.form.valid && signup()" #f="ngForm" novalidate>
-        <div class="input-field">
-            <label for="firstname">Firstname</label>
-            <input type="text" name="firstname" [ngClass]="{ 'invalid': f.submitted && !firstname.valid }" [(ngModel)]="user.firstname" #firstname="ngModel" required />
-            <div *ngIf="f.submitted && !firstname.valid" class="help-block">Firstname is required</div>
+
+<div class="row">
+    <form class="col s12 m8 l6 offset-m2 offset-l3 card" style="padding: 30px 50px 0px 50px;" name="form" (ngSubmit)="f.form.valid && signup()" #f="ngForm" novalidate>
+        <h4 class="purple-text lighten-1" >Enregistre toi !</h4>
+        <div class="section"></div>
+        <div class="row">
+            <div class="col s12 m6 l6">
+                <div class='row'>
+                    <div class='input-field col s12'>
+                        <label for="firstname">Prénom</label>
+                        <input class='validate' type="text" name="firstname" [ngClass]="{ 'invalid': f.submitted && !firstname.valid }" [(ngModel)]="user.firstname" #firstname="ngModel" required />
+                        <div *ngIf="f.submitted && !firstname.valid" class="help-block">Firstname is required</div>
+                    </div>
+                </div>
+                <div class='row'>
+                    <div class='input-field col s12'>
+                        <label for="lastname">Nom</label>
+                        <input class='validate' type="text" name="lastname" [ngClass]="{ 'invalid': f.submitted && !lastname.valid }" [(ngModel)]="user.lastname" #lastname="ngModel" required />
+                        <div *ngIf="f.submitted && !lastname.valid" class="help-block">Lastname is required</div>
+                    </div>
+                </div>
+                <div class='row'>
+                    <div class='input-field col s12' [ngClass]="{ 'has-error': f.submitted && !email.valid }">
+                        <label for="email">E-mail</label>
+                        <input class='validate' type="text" name="email" [ngClass]="{ 'invalid': f.submitted && !email.valid }" [(ngModel)]="user.email" #email="ngModel" required />
+                        <div *ngIf="f.submitted && !email.valid" class="help-block">Email is required</div>
+                    </div>
+                </div>
+                <div class='row'>
+                    <div class='input-field col s12' [ngClass]="{ 'has-error': f.submitted && !password.valid }">
+                        <label for="password">Mot de passe</label>
+                        <input class='validate' type="password" name="password" [ngClass]="{ 'invalid': f.submitted && !password.valid }" [(ngModel)]="user.password" #password="ngModel" required />
+                        <div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>
+                    
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m6 l6">
+                <div class='row'>
+                    <div class='input-field col s12' [ngClass]="{ 'has-error': f.submitted && !address.valid }">
+                        <label for="address">Address</label>
+                        <input class='validate' type="text" name="address" [ngClass]="{ 'invalid': f.submitted && !address.valid }" [(ngModel)]="user.address" #address="ngModel" required />
+                        <div *ngIf="f.submitted && !address.valid" class="help-block">Address is required</div>
+                    </div>
+                </div>   
+                <div class='row'>
+                    <div class='input-field col s12' [ngClass]="{ 'has-error': f.submitted && !city.valid }">
+                        <label for="city">Ville</label>
+                        <input class='validate' type="text" name="city" [ngClass]="{ 'invalid': f.submitted && !city.valid }" [(ngModel)]="user.city" #city="ngModel" required />
+                        <div *ngIf="f.submitted && !city.valid" class="help-block">City is required</div>
+        
+                    </div>
+                </div>
+                <div class='row'>
+                    <div class='input-field col s12' [ngClass]="{ 'has-error': f.submitted && !postalCode.valid }">
+                        <label for="postalCode">Code postale</label>
+                        <input class='validate' type="text" name="postalCode" [ngClass]="{ 'invalid': f.submitted && !postalCode.valid }" [(ngModel)]="user.postalCode" #postalCode="ngModel" required />
+                        <div *ngIf="f.submitted && !postalCode.valid" class="help-block">Postal Code is required</div>
+                    
+                    </div>
+                </div>
+                <div class='row'>
+                    <div class='input-field col s12' [ngClass]="{ 'has-error': f.submitted && !province.valid }">
+                        <label for="province">Province</label>
+                        <input class='validate' type="text" name="province" [ngClass]="{ 'invalid': f.submitted && !province.valid }" [(ngModel)]="user.province" #province="ngModel" required />
+                        <div *ngIf="f.submitted && !province.valid" class="help-block">Province is required</div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="input-field" >
-            <label for="lastname">Lastname</label>
-            <input type="text" name="lastname" [ngClass]="{ 'invalid': f.submitted && !lastname.valid }" [(ngModel)]="user.lastname" #lastname="ngModel" required />
-            <div *ngIf="f.submitted && !lastname.valid" class="help-block">Lastname is required</div>
+        <div class='row'>
+            <div class="input-field">
+                <button [disabled]="loading" class='col s6 offset-s3 btn purple lighten-1'>Signup</button>
+                <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+            </div>
+            <div *ngIf="error" class="alert alert-danger">{{error}}</div>
         </div>
-        <div class="input-field" [ngClass]="{ 'has-error': f.submitted && !email.valid }">
-            <label for="email">Email</label>
-            <input type="text" name="email" [ngClass]="{ 'invalid': f.submitted && !email.valid }" [(ngModel)]="user.email" #email="ngModel" required />
-            <div *ngIf="f.submitted && !email.valid" class="help-block">Email is required</div>
+        <div class='row'>
+            <div class='col s12'>
+                <a href="/welcome" class="right">Déjà un compte ? Se connecter</a><br/>
+                <a href="/forgotPassword" class="right">Mot de passe oublié ?</a>
+            </div>
         </div>
-        <div class="input-field" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
-            <label for="password">Password</label>
-            <input type="password" name="password" [ngClass]="{ 'invalid': f.submitted && !password.valid }" [(ngModel)]="user.password" #password="ngModel" required />
-            <div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>
-        </div>
-        <div class="input-field" [ngClass]="{ 'has-error': f.submitted && !city.valid }">
-            <label for="city">City</label>
-            <input type="text" name="city" [ngClass]="{ 'invalid': f.submitted && !city.valid }" [(ngModel)]="user.city" #city="ngModel" required />
-            <div *ngIf="f.submitted && !city.valid" class="help-block">City is required</div>
-        </div>
-        <div class="input-field" [ngClass]="{ 'has-error': f.submitted && !address.valid }">
-            <label for="address">Address</label>
-            <input type="text" name="address" [ngClass]="{ 'invalid': f.submitted && !address.valid }" [(ngModel)]="user.address" #address="ngModel" required />
-            <div *ngIf="f.submitted && !address.valid" class="help-block">Address is required</div>
-        </div>
-        <div class="input-field" [ngClass]="{ 'has-error': f.submitted && !postalCode.valid }">
-            <label for="postalCode">Postal Code</label>
-            <input type="text" name="postalCode" [ngClass]="{ 'invalid': f.submitted && !postalCode.valid }" [(ngModel)]="user.postalCode" #postalCode="ngModel" required />
-            <div *ngIf="f.submitted && !postalCode.valid" class="help-block">Postal Code is required</div>
-        </div>
-        <div class="input-field" [ngClass]="{ 'has-error': f.submitted && !province.valid }">
-            <label for="province">Province</label>
-            <input type="text" name="province" [ngClass]="{ 'invalid': f.submitted && !province.valid }" [(ngModel)]="user.province" #province="ngModel" required />
-            <div *ngIf="f.submitted && !province.valid" class="help-block">Province is required</div>
-        </div>
-        <div class="input-field">
-            <button [disabled]="loading" class="btn btn-primary">Signup</button>
-            <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-        </div>
-        <div *ngIf="error" class="alert alert-danger">{{error}}</div>
-  </form>
+    </form>
 </div>

@@ -26,7 +26,7 @@ export class AuthenticationService {
             .set('Content-Type', 'application/x-www-form-urlencoded')
             .set('Authorization', 'Basic ' + btoa(email + ':' + password))
         };
-        return this.httpClient.post(environment.apiUrl + '/api/auth', body, headers)
+        return this.httpClient.post(environment.apiUrl + 'auth', body, headers)
             .map((response: Response) => {
                     // login successful if there's a jwt token in the response
                     const token = response['token'];
