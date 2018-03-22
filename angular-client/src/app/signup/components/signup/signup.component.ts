@@ -11,9 +11,9 @@ import { FormControl, ValidatorFn, ValidationErrors, AbstractControl } from '@an
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
-  private user = new User();
-  private loading = false;
-  private error = '';
+  public user = new User();
+  public loading = false;
+  public error = '';
 
   constructor(private router: Router,
               private signupService: SignupService,
