@@ -81,13 +81,14 @@ export const coapPutRequest = ({ user }, res, next) => {
 }
 
 export const coapServerGetRequest = ({ user }, res, next) => {
-  var req = coap.request('https://coap-silo.herokuapp.com/')
+  var req = coap.request('coap://coap.lesperance.cloud/demo')
   
   var payload = {
-    temperature: 1,
-    humidity: 2,
-    pressure: 3
+    temperature: 10,
+    humidity: 20,
+    pressure: 30
   }
+  
   req.setOption("Content-Format", "application/json");
   req.write(JSON.stringify(payload));
 
