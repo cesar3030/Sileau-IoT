@@ -67,7 +67,7 @@ echo "Generating the environment.prod.ts file..."
 cat << EOF > src/environments/environment.prod.ts
 export const environment = {
   production: true,
-  apiUrl: 'https://$HEROKU_API_APP.herokuapp.com'
+  apiUrl: 'https://$HEROKU_API_APP.herokuapp.com/api/'
 };
 EOF
 
