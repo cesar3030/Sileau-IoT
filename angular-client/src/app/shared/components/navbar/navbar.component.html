@@ -1,10 +1,13 @@
-<nav *ngIf="nav.visible; else elseBlock" class="nav-extended blue darken-1">
+<nav *ngIf="nav.visible; else elseBlock" class="nav-extended blue">
     <div class="nav-wrapper">
         <a href="#" class="brand-logo center">Silo</a>
+        <ul class="right">
+            <li><a [routerLink]="['/logout']"><i class="material-icons right text-white">exit_to_app</i></a></li>
+        </ul>
     </div>
 </nav>
 <ng-template #elseBlock>
-    <nav class="blue darken-1">
+    <nav class="blue">
         <div class="nav-wrapper">
             <a href="#" class="brand-logo center">Bienvenue !</a>
         </div>
