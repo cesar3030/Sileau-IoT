@@ -1,14 +1,31 @@
 <h2>Masters</h2>
-<div>
- Fan: {{fanActivated}}
- <button (click)="toggleFlag()">Toggle</button>
+<div class="row">
+ <div class="switch">
+  Ventilation:
+  <label>
+    Off
+    <input (click)="toggleFlag()" [checked]="fanActivated" type="checkbox">
+    <span class="lever"></span>
+    On
+  </label>
 </div>
-<div>
+</div>
+<div class="row">
   Température: {{temperature}}
 </div>
-<div>
+<div class="row">
   Humidité: {{humidity}}
 </div>
-<div>
+<div class="row">
   Pression: {{pressure}}
+</div>
+<div class="row">
+  <div class="col md-6">
+      <div style="display: block;">
+        <app-chart #myChart class="chart"
+          [datasets]="lineChartData"
+          [labels]="lineChartLabels">
+        </app-chart>
+      </div>
+    </div>
 </div>

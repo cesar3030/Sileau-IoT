@@ -1,7 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { MasterService } from '../../services/master.service'
 import { Observable } from 'rxjs/Rx';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { AppComponent } from '../../../app.component';
 
 @Component({
   selector: 'app-master',
@@ -9,14 +10,24 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
   styleUrls: ['./master.component.css']
 })
 export class MasterComponent implements OnInit, OnDestroy {
+  private nbDataChart = 30
+  public masters
+  public fanActivated
+  public pressure
+  public temperature
+  public humidity
+  private intervalId
+  public lineChartLabels:Array<any>
+  public lineChartData:Array<any> = [
+    {data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A'},
+    {data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B'},
+    {data: [18, 48, 77, 9, 100, 27, 40], label: 'Series C'}
+  ];
 
-  public masters;
-  public fanActivated;
-  public pressure;
-  public temperature;
-  public humidity;
-  private intervalId;
-  constructor(private _masterService :MasterService) { }
+  constructor(private _masterService :MasterService) { 
+    this.lineChartLabels = new Array(this.nbDataChart).map((i) => '')
+  }
+  
 
   ngOnInit() {
     this.getMasters()
@@ -41,8 +52,12 @@ export class MasterComponent implements OnInit, OnDestroy {
     this._masterService.getMasters().subscribe(
       data => {
         this.masters = data
+        this.masters[0].temperature = this.masters[0].temperature.slice(Math.max(this.masters[0].temperature.length - this.nbDataChart, 1))
+        this.masters[0].humidity = this.masters[0].humidity.slice(Math.max(this.masters[0].humidity.length - this.nbDataChart, 1))
+        this.masters[0].pressure = this.masters[0].pressure.slice(Math.max(this.masters[0].pressure.length - this.nbDataChart, 1))
         this.mapData(data)
         console.log(this.fanActivated)
+        this.processDataForCharts()
       },
       err => console.log(err),
       () => console.log('done loading masters')
@@ -61,6 +76,28 @@ export class MasterComponent implements OnInit, OnDestroy {
          return Observable.throw(error);
        }
     );
+  }
+
+  processDataForCharts(){
+    this.lineChartData = [
+      {
+        data: this.masters[0].temperature.map((entry) => entry.value),
+        label: 'Température'
+      },
+      {
+        data: this.masters[0].pressure.map((entry) => entry.value),
+        label: 'Pression'
+      },
+      {
+        data: this.masters[0].humidity.map((entry) => entry.value),
+        label: 'Humidité'
+      }
+    ];
+    this.lineChartLabels = this.masters[0].temperature.map((entry) => {
+      const d = new Date(entry.datetime)
+      return d.getHours() + ':' + d.getMinutes()
+    })
+    console.log(this.lineChartLabels)
   }
 
   ngOnDestroy() {

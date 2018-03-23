@@ -18,6 +18,8 @@ import { WelcomeComponent } from './welcome/components/welcome/welcome.component
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { NavbarService } from './shared/services/navbar.service';
 import { MasterComponent } from './master/components/master/master.component';
+import { ChartsModule } from 'ng2-charts';
+import { ChartComponent } from './shared/components/chart/chart.component';
 
 @NgModule({
   declarations: [
@@ -28,14 +30,16 @@ import { MasterComponent } from './master/components/master/master.component';
     SignupComponent,
     WelcomeComponent,
     NavbarComponent,
-    MasterComponent
+    MasterComponent,
+    ChartComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
-    MaterializeModule
+    MaterializeModule,
+    ChartsModule
   ],
   providers: [
     ArticleService,
