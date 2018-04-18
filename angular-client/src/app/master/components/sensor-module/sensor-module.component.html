@@ -1,0 +1,59 @@
+<div class="row" style="margin-top: 5%">
+  <div class="col m4 s12">
+    <div class="card small" style="background-color: #eeeeee">
+      <div class="card-content" style="padding-top: 28%">
+        <div class="switch center">
+            <label>
+            Off
+            <input (click)="toggleFlag()" [checked]="fanActivated" type="checkbox">
+            <span class="lever"></span>
+            On
+            </label>	
+          </div>
+        </div>
+      <div class="card-content card-bottom" style="background-color: #bdbdbd">
+          <h5 class="center grey-text text-lighten-3">Ventilation</h5>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col m4 s12">
+      <div class="card small" style="background-color: #f9bcc9">
+        <div class="card-content">
+            <h1 class="center-align grey-text text-lighten-3" style="margin-top: 20%;">{{temperature}}</h1>
+          </div>
+        <div class="card-content card-bottom" style="background-color: #fe6383">
+            <h5 class="center grey-text text-lighten-3">Température</h5>
+        </div>
+      </div>
+    </div>
+    <div class="col m4 s12">
+      <div class="card small" style="background-color: #f9e5b7">
+        <div class="card-content">
+            <h1 class="center-align grey-text text-lighten-3" style="margin-top: 20%;">{{humidity}}</h1>
+        </div>
+        <div class="card-content card-bottom" style="background-color: #ffce55">
+            <h5 class="center grey-text text-lighten-3">Humidité</h5>
+        </div>
+      </div>
+    </div>
+    <div class="col m4 s12">
+      <div class="card small" style="background-color: #aad4f2">
+        <div class="card-content">
+            <h1 class="center-align grey-text text-lighten-3" style="margin-top: 20%;">{{pressure}}</h1>
+        </div>
+        <div class="card-content card-bottom" style="background-color: #36a1eb">
+            <h5 class="center grey-text text-lighten-3">Pression</h5>
+        </div>
+      </div>
+    </div>
+</div>
+<div class="col md8">
+  <div style="display: block;">
+    <app-chart #myChart class="chart"
+      [datasets]="lineChartData"
+      [labels]="lineChartLabels">
+    </app-chart>
+  </div>
+</div>

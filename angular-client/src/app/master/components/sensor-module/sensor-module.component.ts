@@ -1,30 +1,40 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
-import { MasterService } from '../../services/master.service'
-import { Observable } from 'rxjs/Rx';
-import {MatSlideToggleModule} from '@angular/material/slide-toggle';
-import { AppComponent } from '../../../app.component';
+import { Component, OnInit, Input } from '@angular/core';
+import { Master } from '../../models/master';
+import { MasterService } from '../../services/master.service';
+import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'app-master',
-  templateUrl: './master.component.html',
-  styleUrls: ['./master.component.css']
+  selector: 'app-sensor-module',
+  templateUrl: './sensor-module.component.html',
+  styleUrls: ['./sensor-module.component.css']
 })
-export class MasterComponent implements OnInit, OnDestroy {
-
-  public masters
+export class SensorModuleComponent implements OnInit {
+  @Input() module: Master;
+  private nbDataChart = 30
+  public fanActivated
+  public pressure
+  public temperature
+  public humidity
+  private intervalId
+  public lineChartLabels:Array<any>
+  public lineChartData:Array<any> = [
+    {data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A'},
+    {data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B'},
+    {data: [18, 48, 77, 9, 100, 27, 40], label: 'Series C'}
+  ];
 
   constructor(private _masterService :MasterService) { 
+    this.lineChartLabels = new Array(this.nbDataChart).map((i) => '')
   }
   
-
   ngOnInit() {
-    this.getMasters()
+    this.getModuleInfo()
     this.updateData()
   }
 
   updateData(){
     this.intervalId = setInterval(
-      () => this.getMasters(),
+      () => this.getModuleInfo(),
       15000
     )
   }
@@ -36,13 +46,13 @@ export class MasterComponent implements OnInit, OnDestroy {
     this.temperature = data[0].temperature[data[0].temperature.length - 1].value
   }
   
-  getMasters() {
+  getModuleInfo() {
     this._masterService.getMasters().subscribe(
       data => {
-        this.masters = data
-        this.masters[0].temperature = this.masters[0].temperature.slice(Math.max(this.masters[0].temperature.length - this.nbDataChart, 1))
-        this.masters[0].humidity = this.masters[0].humidity.slice(Math.max(this.masters[0].humidity.length - this.nbDataChart, 1))
-        this.masters[0].pressure = this.masters[0].pressure.slice(Math.max(this.masters[0].pressure.length - this.nbDataChart, 1))
+        this.module = data
+        this.module[0].temperature = this.module[0].temperature.slice(Math.max(this.module.temperature.length - this.nbDataChart, 1))
+        this.module[0].humidity = this.module[0].humidity.slice(Math.max(this.module.humidity.length - this.nbDataChart, 1))
+        this.module[0].pressure = this.module[0].pressure.slice(Math.max(this.module.pressure.length - this.nbDataChart, 1))
         this.mapData(data)
         console.log(this.fanActivated)
         this.processDataForCharts()
@@ -53,11 +63,11 @@ export class MasterComponent implements OnInit, OnDestroy {
   }
 
   toggleFlag() {
-    this._masterService.toogleActivation(this.masters[0]).subscribe(
+    this._masterService.toogleActivation(module).subscribe(
        data => {
         console.log(data)
         this.fanActivated = !this.fanActivated
-        this.masters[0].activated = this.fanActivated
+        this.module.activated = this.fanActivated
        },
        error => {
          console.log("Error updating flag!");

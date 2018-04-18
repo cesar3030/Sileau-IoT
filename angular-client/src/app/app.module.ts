@@ -20,6 +20,7 @@ import { NavbarService } from './shared/services/navbar.service';
 import { MasterComponent } from './master/components/master/master.component';
 import { ChartsModule } from 'ng2-charts';
 import { ChartComponent } from './shared/components/chart/chart.component';
+import { SensorModuleComponent } from './master/components/sensor-module/sensor-module.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { ChartComponent } from './shared/components/chart/chart.component';
     WelcomeComponent,
     NavbarComponent,
     MasterComponent,
-    ChartComponent
+    ChartComponent,
+    SensorModuleComponent
   ],
   imports: [
     BrowserModule,
