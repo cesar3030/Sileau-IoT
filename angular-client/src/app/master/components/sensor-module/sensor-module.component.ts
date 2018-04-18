@@ -39,21 +39,20 @@ export class SensorModuleComponent implements OnInit {
     )
   }
 
-  mapData(data){
-    this.fanActivated = data[0].activated
-    this.humidity = data[0].humidity[data[0].humidity.length - 1].value
-    this.pressure = data[0].pressure[data[0].pressure.length - 1].value
-    this.temperature = data[0].temperature[data[0].temperature.length - 1].value
+  mapData(){
+    this.fanActivated = this.module.activated
+    this.humidity = this.module.humidity[this.module.humidity.length - 1].value
+    this.pressure = this.module.pressure[this.module.pressure.length - 1].value
+    this.temperature = this.module.temperature[this.module.temperature.length - 1].value
   }
   
   getModuleInfo() {
     this._masterService.getMasters().subscribe(
       data => {
-        this.module = data
-        this.module[0].temperature = this.module[0].temperature.slice(Math.max(this.module.temperature.length - this.nbDataChart, 1))
-        this.module[0].humidity = this.module[0].humidity.slice(Math.max(this.module.humidity.length - this.nbDataChart, 1))
-        this.module[0].pressure = this.module[0].pressure.slice(Math.max(this.module.pressure.length - this.nbDataChart, 1))
-        this.mapData(data)
+        this.module.temperature = this.module.temperature.slice(Math.max(this.module.temperature.length - this.nbDataChart, 1))
+        this.module.humidity = this.module.humidity.slice(Math.max(this.module.humidity.length - this.nbDataChart, 1))
+        this.module.pressure = this.module.pressure.slice(Math.max(this.module.pressure.length - this.nbDataChart, 1))
+        this.mapData()
         console.log(this.fanActivated)
         this.processDataForCharts()
       },
@@ -79,19 +78,19 @@ export class SensorModuleComponent implements OnInit {
   processDataForCharts(){
     this.lineChartData = [
       {
-        data: this.masters[0].temperature.map((entry) => entry.value),
+        data: this.module.temperature.map((entry) => entry.value),
         label: 'Température'
       },
       {
-        data: this.masters[0].pressure.map((entry) => entry.value),
+        data: this.module.pressure.map((entry) => entry.value),
         label: 'Pression'
       },
       {
-        data: this.masters[0].humidity.map((entry) => entry.value),
+        data: this.module.humidity.map((entry) => entry.value),
         label: 'Humidité'
       }
     ];
-    this.lineChartLabels = this.masters[0].temperature.map((entry) => {
+    this.lineChartLabels = this.module.temperature.map((entry) => {
       const d = new Date(entry.datetime)
       return d.getHours() + ':' + d.getMinutes()
     })

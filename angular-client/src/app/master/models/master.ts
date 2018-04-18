@@ -2,7 +2,7 @@ export class Master {
     imei: string;
     host: string;
     activated: boolean;
-    temperature: number[];
-    pressure: number[];
-    humidity: number[];
+    temperature: any[];
+    pressure: any[];
+    humidity: any[];
 }
