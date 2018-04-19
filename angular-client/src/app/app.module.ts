@@ -6,7 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ArticleListComponent } from './article/components/article-list/article-list.component';
 import { ArticleService } from './article/services/article.service';
-import { MasterService } from './master/services/master.service';
+import { ModuleService } from './master/services/module.service';
 import { AuthenticationService } from './shared/services/authentication.service';
 import { HomeComponent } from './home/components/home/home.component';
 import { AuthGuard } from './shared/guards/auth.guard';
@@ -20,6 +20,7 @@ import { NavbarService } from './shared/services/navbar.service';
 import { MasterComponent } from './master/components/master/master.component';
 import { ChartsModule } from 'ng2-charts';
 import { ChartComponent } from './shared/components/chart/chart.component';
+import { SensorModuleComponent } from './master/components/sensor-module/sensor-module.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { ChartComponent } from './shared/components/chart/chart.component';
     WelcomeComponent,
     NavbarComponent,
     MasterComponent,
-    ChartComponent
+    ChartComponent,
+    SensorModuleComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +49,7 @@ import { ChartComponent } from './shared/components/chart/chart.component';
     AuthenticationService,
     SignupService,
     NavbarService,
-    MasterService
+    ModuleService
   ],
   bootstrap: [AppComponent]
 })
