@@ -9,7 +9,8 @@ import { Observable } from 'rxjs';
   styleUrls: ['./sensor-module.component.css']
 })
 export class SensorModuleComponent implements OnInit {
-  @Input() module: Module;
+  @Input() sModule: Module
+  private milliseconds = 10000
   private nbDataChart = 30
   public fanActivated
   public pressure
@@ -28,33 +29,33 @@ export class SensorModuleComponent implements OnInit {
   }
   
   ngOnInit() {
-    this.getModuleInfo()
+    this.processData()
     this.updateData()
   }
 
   updateData(){
     this.intervalId = setInterval(
       () => this.getModuleInfo(),
-      15000
+      this.milliseconds
     )
   }
 
-  mapData(){
-    this.fanActivated = this.module.activated
-    this.humidity = this.module.humidity[this.module.humidity.length - 1].value
-    this.pressure = this.module.pressure[this.module.pressure.length - 1].value
-    this.temperature = this.module.temperature[this.module.temperature.length - 1].value
+  processData(){
+    this.fanActivated = this.sModule.activated
+    this.humidity = this.sModule.humidity[this.sModule.humidity.length - 1].value
+    this.pressure = this.sModule.pressure[this.sModule.pressure.length - 1].value
+    this.temperature = this.sModule.temperature[this.sModule.temperature.length - 1].value
+    this.sModule.temperature = this.sModule.temperature.slice(Math.max(this.sModule.temperature.length - this.nbDataChart, 1))
+    this.sModule.humidity = this.sModule.humidity.slice(Math.max(this.sModule.humidity.length - this.nbDataChart, 1))
+    this.sModule.pressure = this.sModule.pressure.slice(Math.max(this.sModule.pressure.length - this.nbDataChart, 1))
+    this.processDataForCharts()
   }
   
   getModuleInfo() {
-    this._moduleService.getModule(this.module).subscribe(
+    this._moduleService.getModule(this.sModule).subscribe(
       data => {
-        this.module.temperature = this.module.temperature.slice(Math.max(this.module.temperature.length - this.nbDataChart, 1))
-        this.module.humidity = this.module.humidity.slice(Math.max(this.module.humidity.length - this.nbDataChart, 1))
-        this.module.pressure = this.module.pressure.slice(Math.max(this.module.pressure.length - this.nbDataChart, 1))
-        this.mapData()
-        console.log(this.fanActivated)
-        this.processDataForCharts()
+        this.sModule = data
+        this.processData()
       },
       err => console.log(err),
       () => console.log('done loading masters')
@@ -62,11 +63,11 @@ export class SensorModuleComponent implements OnInit {
   }
 
   toggleFlag() {
-    this._moduleService.toogleActivation(module).subscribe(
+    this._moduleService.toogleActivation(this.sModule).subscribe(
        data => {
         console.log(data)
         this.fanActivated = !this.fanActivated
-        this.module.activated = this.fanActivated
+        this.sModule.activated = this.fanActivated
        },
        error => {
          console.log("Error updating flag!");
@@ -78,23 +79,22 @@ export class SensorModuleComponent implements OnInit {
   processDataForCharts(){
     this.lineChartData = [
       {
-        data: this.module.temperature.map((entry) => entry.value),
+        data: this.sModule.temperature.map((entry) => entry.value),
         label: 'Température'
       },
       {
-        data: this.module.pressure.map((entry) => entry.value),
+        data: this.sModule.pressure.map((entry) => entry.value),
         label: 'Pression'
       },
       {
-        data: this.module.humidity.map((entry) => entry.value),
+        data: this.sModule.humidity.map((entry) => entry.value),
         label: 'Humidité'
       }
     ];
-    this.lineChartLabels = this.module.temperature.map((entry) => {
+    this.lineChartLabels = this.sModule.temperature.map((entry) => {
       const d = new Date(entry.datetime)
       return d.getHours() + ':' + d.getMinutes()
     })
-    console.log(this.lineChartLabels)
   }
 
   ngOnDestroy() {
@@ -102,5 +102,4 @@ export class SensorModuleComponent implements OnInit {
       clearInterval(this.intervalId);
     }
   }
-  
 }

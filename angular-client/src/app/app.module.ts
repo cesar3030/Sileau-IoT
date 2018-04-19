@@ -6,7 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ArticleListComponent } from './article/components/article-list/article-list.component';
 import { ArticleService } from './article/services/article.service';
-import { MasterService } from './master/services/master.service';
+import { ModuleService } from './master/services/module.service';
 import { AuthenticationService } from './shared/services/authentication.service';
 import { HomeComponent } from './home/components/home/home.component';
 import { AuthGuard } from './shared/guards/auth.guard';
@@ -49,7 +49,7 @@ import { SensorModuleComponent } from './master/components/sensor-module/sensor-
     AuthenticationService,
     SignupService,
     NavbarService,
-    MasterService
+    ModuleService
   ],
   bootstrap: [AppComponent]
 })

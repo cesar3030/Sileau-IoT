@@ -11,7 +11,7 @@ export class ChartComponent {
   @Input('labels') lineChartLabels:Array<any>
   @Input('options') lineChartOptions:any = {
     responsive: true
-  };
+  }
   @Input('legend') lineChartLegend:boolean = true
   @Input('chartType') lineChartType:string = 'line'
 }

@@ -15,15 +15,16 @@ export class ModuleService {
     return this.http.get<Module[]>(environment.apiUrl + 'masters');
   }
 
-  getModule(module) {
-    return this.http.get<Module[]>(environment.apiUrl + 'masters/' + module.id);
+  getModule(m): Observable<Module> {
+    return this.http.get<Module>(environment.apiUrl + 'masters/' + m.id);
   }
 
-  toogleActivation(module){
-    return this.http.put(environment.apiUrl + 'masters/' + module.id, {activated: !module.activated}, {});
+  toogleActivation(m){
+    console.log("log: "+m.id)
+    return this.http.put(environment.apiUrl + 'masters/' + m.id, {activated: !m.activated}, {});
   }
 
-  coapRequest(master) {
-    return this.http.post(environment.apiUrl + 'masters/' + module.id + '/request', {test: ''}, {});
+  coapRequest(m) {
+    return this.http.post(environment.apiUrl + 'masters/' + m.id + '/request', {test: ''}, {});
   }
 }

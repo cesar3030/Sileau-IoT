@@ -17,7 +17,6 @@ export class MasterComponent implements OnInit {
   constructor(private _moduleService :ModuleService) { 
   }
   
-
   ngOnInit() {
     this.getModules()
   }
@@ -26,6 +25,7 @@ export class MasterComponent implements OnInit {
     this._moduleService.getModules().subscribe(
       data => {
         this.modules = data
+        console.log(data)
       },
       err => console.log(err),
       () => console.log('done loading masters')
