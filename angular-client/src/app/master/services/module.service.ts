@@ -21,7 +21,7 @@ export class ModuleService {
 
   toogleActivation(m){
     console.log("log: "+m.id)
-    return this.http.put(environment.apiUrl + 'masters/' + m.id, {activated: !m.activated}, {});
+    return this.http.put(environment.apiUrl + 'masters/' + m.id, {activated: !m.activated, imei: m.imei}, {});
   }
 
   coapRequest(m) {

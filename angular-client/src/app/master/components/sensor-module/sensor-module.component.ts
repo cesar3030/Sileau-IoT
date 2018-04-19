@@ -91,10 +91,10 @@ export class SensorModuleComponent implements OnInit {
         label: 'Humidité'
       }
     ];
-    var count= 1
+    var _count = 1
     this.lineChartLabels = this.sModule.temperature.map((entry) => {
       const d = new Date(entry.datetime)
-      return (count++ % 5) == 0 ?  this.formatedDate(d) : ''
+      return (_count++ % 3) == 0 ?  this.formatedDate(d) : ''
     })
   }
 
