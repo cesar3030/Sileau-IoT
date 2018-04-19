@@ -91,10 +91,22 @@ export class SensorModuleComponent implements OnInit {
         label: 'Humidité'
       }
     ];
+    var count= 1
     this.lineChartLabels = this.sModule.temperature.map((entry) => {
       const d = new Date(entry.datetime)
-      return d.getHours() + ':' + d.getMinutes()
+      return (count++ % 5) == 0 ?  this.formatedDate(d) : ''
     })
+  }
+
+  formatedDate(d){
+    return this.addZero(d.getHours()) + ':' + this.addZero(d.getMinutes()) + ':' + this.addZero(d.getSeconds())
+  }
+
+  addZero(i) {
+    if (i < 10) {
+        i = "0" + i;
+    }
+    return i;
   }
 
   ngOnDestroy() {
