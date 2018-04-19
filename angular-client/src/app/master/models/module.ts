@@ -1,4 +1,4 @@
-export class Master {
+export class Module {
     imei: string;
     host: string;
     activated: boolean;

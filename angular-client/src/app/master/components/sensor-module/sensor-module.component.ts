@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Master } from '../../models/master';
-import { MasterService } from '../../services/master.service';
+import { Module } from '../../models/module';
+import { ModuleService } from '../../services/module.service';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./sensor-module.component.css']
 })
 export class SensorModuleComponent implements OnInit {
-  @Input() module: Master;
+  @Input() module: Module;
   private nbDataChart = 30
   public fanActivated
   public pressure
@@ -23,7 +23,7 @@ export class SensorModuleComponent implements OnInit {
     {data: [18, 48, 77, 9, 100, 27, 40], label: 'Series C'}
   ];
 
-  constructor(private _masterService :MasterService) { 
+  constructor(private _moduleService :ModuleService) { 
     this.lineChartLabels = new Array(this.nbDataChart).map((i) => '')
   }
   
@@ -47,7 +47,7 @@ export class SensorModuleComponent implements OnInit {
   }
   
   getModuleInfo() {
-    this._masterService.getMasters().subscribe(
+    this._moduleService.getModule(this.module).subscribe(
       data => {
         this.module.temperature = this.module.temperature.slice(Math.max(this.module.temperature.length - this.nbDataChart, 1))
         this.module.humidity = this.module.humidity.slice(Math.max(this.module.humidity.length - this.nbDataChart, 1))
@@ -62,7 +62,7 @@ export class SensorModuleComponent implements OnInit {
   }
 
   toggleFlag() {
-    this._masterService.toogleActivation(module).subscribe(
+    this._moduleService.toogleActivation(module).subscribe(
        data => {
         console.log(data)
         this.fanActivated = !this.fanActivated
