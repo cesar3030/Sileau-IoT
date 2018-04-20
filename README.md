@@ -37,3 +37,10 @@ URL: [http://localhost:4200](http://localhost:4200)
 ### Database 
 The Database is a MongoDB database.  
 URL: [http://localhost:27017](http://localhost:27017)
+
+## Application
+Here is some screenshot of the application running on Heroku.
+# Desktop version
+
+# Tablet version
+# Mobile version
