@@ -1,4 +1,4 @@
-# Sileau tbnk
+# Sileau
 ## Project description
 The greatest silo monitoring system ever created!
 ## How to install
