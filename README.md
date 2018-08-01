@@ -41,6 +41,9 @@ URL: [http://localhost:27017](http://localhost:27017)
 ## Application
 Here is some screenshot of the application running on Heroku.
 # Desktop version
-
+![Silo desktop](https://github.com/cesar3030/Sileau-IoT/blob/master/doc/screenshot/desktop-app-silo.png)
 # Tablet version
+![Silo tablet](https://github.com/cesar3030/Sileau-IoT/blob/master/doc/screenshot/tablet-app-silo.png)
 # Mobile version
+(Portrait view)
+![Silo mobile](https://github.com/cesar3030/Sileau-IoT/blob/master/doc/screenshot/mobile-app-silo.png)
